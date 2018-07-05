@@ -1,6 +1,9 @@
 import glob
 import re
-from func import to_mecab
+import sys
+sys.path.append('../Function')
+from Mecab_func import to_mecab
+
 
 path_list=glob.glob('./new_text/*.txt')    
 path_list2=glob.glob('./new_delete/*.txt')

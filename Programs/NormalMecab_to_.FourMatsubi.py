@@ -9,13 +9,13 @@ import xlsxwriter
 import numpy as np
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.feature_extraction.text import TfidfTransformer
-from func import *
+import glob
+from Mecab_func import *
 import re
 
 #このコードは普通の、全議員文のめかぶtxtファイルを読み込んだ上、
 # 読点以下の文字だけをファイルにめかぶ形式でなく普通の形式にかきこむコードである
 # このあと、読点以下のtxtファイルを形態素解析し、前４単語をあれする
-#matubi_copusとともに使う
 #2に改良し、複数あるファイル群に対応した。
 # このこーどは、普通に4単語まえをめかぶにして、txtにして次にどくてんを区別してまたｔｘｔにするという二度手間を踏んでいる
 
