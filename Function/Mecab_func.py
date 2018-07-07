@@ -10,6 +10,130 @@ import MeCab
 from collections import OrderedDict
 from collections import Counter
 import glob
+def make_lines2(fname_parsed):#ジェネレーター
+    # MeCabfileが必要↑
+
+    with open(fname_parsed) as file_parsed:       
+# ,'r',errors='ignore',encoding='utf-8_sig'
+        morphemes = []
+        
+        # print('===========file_parsed=============')
+        # print(file_parsed)
+        for line in file_parsed:
+            # line=re.sub('.+　','',line)
+            # print('===========line=============')
+            # print(line)
+            # print('===========line=============')
+
+            #ここではまだ文字列↓
+            
+            # ↑ここでやってしまうと、colsの長さがおかしくなって、
+            # 全部をリストにいれられなくなってしまう
+
+            # 表層形はtab区切り、それ以外は','区切りでバラす
+            cols = line.split('\t')
+            if(len(cols) < 2):
+                raise StopIteration     # 区切りがなければ終了
+            # ここでリスト型になる↓   
+            res_cols = cols[1].split(',')
+
+            # 辞書作成、リストに追加
+    
+            # cols[0]=re.sub('.+　','',cols[0])  
+            if  cols[0]!='\u3000':           
+                morphemes.append(cols[0])
+
+            # 品詞細分類1が'句点'なら文の終わりと判定
+            if res_cols[1] == '句点':
+
+                # morphemes.append(cols[0])
+                # ↑これがあると。が二つになってしまう
+                yield morphemes
+                # print(morphemes)
+                morphemes = []
+
+
+
+#count_morepheme3の後継者
+# Countvecotorizerに渡せる形のリストを出力する
+# 今回は、4語以下の末尾表現がリストになったもの
+# def Output_matsubi_BoWList(write_file,mecab_file):
+
+#     copus=[]
+#     #語数カウンター
+#     word=""
+#     for morphemes in make_lines2(mecab_file):
+#         # print(morphemes)
+#     #   ↑デバッグ用
+#         if len(morphemes)>=5:
+#             copus.append(morphemes[-5]+morphemes[-4]+morphemes[-3]+morphemes[-2])
+#         elif len(morphemes)>=4:
+#             copus.append(morphemes[-4]+morphemes[-3]+morphemes[-2])
+#             # print(copus)
+#             # print(3)
+#         elif len(morphemes)>=3:
+#             # print(morphemes)
+#             copus.append(morphemes[-3]+morphemes[-2])
+#             # print(copus)
+#             # print(2)
+#         elif len(morphemes)>=2:
+#             copus.append(morphemes[-2])
+#             # print(copus)
+#             # print(1)
+#     print('--------------coups---------------------------')        
+#     print(copus)
+#     print('--------------coups---------------------------')        
+
+#     word=''.join(copus)
+#     # word+=copus
+#     print('--------------word---------------------------')      
+#     print(word)
+#     print('--------------word---------------------------')      
+#     # with open(write_file, mode='w',errors='ignore') as out_file:
+#     #     out_file.write(word)
+
+#あるフォルダに入っているtxtファイルを一つずつ読み込み、一つずつMeCabファイルに変換して保存する
+def gather3(open_file):
+    print('a')
+    for file in glob.glob(open_file):
+        print(file)
+        to_mecab(file,'{}.mecab'.format(file))
+
+
+def count_morpheme3(write_file,mecab_file):
+
+    copus=[]
+    #語数カウンター
+    word=""
+    for morphemes in make_lines2(mecab_file):
+        # print(morphemes)
+    #   ↑デバッグ用
+        if len(morphemes)>=5:
+            copus.append(morphemes[-5]+morphemes[-4]+morphemes[-3]+morphemes[-2])
+        elif len(morphemes)>=4:
+            copus.append(morphemes[-4]+morphemes[-3]+morphemes[-2])
+            # print(copus)
+            # print(3)
+        elif len(morphemes)>=3:
+            # print(morphemes)
+            copus.append(morphemes[-3]+morphemes[-2])
+            # print(copus)
+            # print(2)
+        elif len(morphemes)>=2:
+            copus.append(morphemes[-2])
+            # print(copus)
+            # print(1)
+    print('--------------coups---------------------------')        
+    print(copus)
+    print('--------------coups---------------------------')        
+
+    word=''.join(copus)
+    # word+=copus
+    print('--------------word---------------------------')      
+    print(word)
+    print('--------------word---------------------------')      
+    # with open(write_file, mode='w',errors='ignore') as out_file:
+    #     out_file.write(word)
 
 #あるフォルダに入っているtxtファイルを一つずつ読み込み、一つずつMeCabファイルに変換して保存する
 def gather3(open_file):

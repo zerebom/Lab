@@ -101,6 +101,7 @@ path_list=glob.glob('./new_delete/*.txt.mecab')
 
 
 #MeCabファイルを成型して出力するやつ
+# 、以下の文字のmecabtxtを読み込んで、4次以下txtに成型するやつ
 def count_morpheme3(write_file,mecab_file):
 
     copus=[]
@@ -131,12 +132,12 @@ def count_morpheme3(write_file,mecab_file):
     word=''.join(copus)
     # word+=copus
     print('--------------word---------------------------')      
-    print(word)
+    # print(word)
     print('--------------word---------------------------')      
-    with open(write_file, mode='w',errors='ignore') as out_file:
-        out_file.write(word)
+    # with open(write_file, mode='w',errors='ignore') as out_file:
+    #     out_file.write(word)
 
-path_list2=glob.glob('./new_matubi/*.txt')
+path_list2=glob.glob(r'C:\Users\icech\Desktop\share\Lab\2018_07_04\Docments\New_yato\new_matubi/*.txt')
 
 for i,path in enumerate(path_list2):
     print(i)
