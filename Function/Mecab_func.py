@@ -136,11 +136,11 @@ def count_morpheme3(write_file,mecab_file):
     #     out_file.write(word)
 
 #あるフォルダに入っているtxtファイルを一つずつ読み込み、一つずつMeCabファイルに変換して保存する
-def gather3(open_file):
-    print('a')
-    for file in glob.glob(open_file):
-        print(file)
-        to_mecab(file,'{}.mecab'.format(file))
+# def gather3(open_file):
+#     print('a')
+#     for file in glob.glob(open_file):
+#         print(file)
+#         to_mecab(file,'{}.mecab'.format(file))
 
 
 #とあるフォルダの中のファイルを一つずつ開き、一つにまとめて出力する。
